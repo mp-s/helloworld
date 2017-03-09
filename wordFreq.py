@@ -1,8 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-import os
-import sys
-import re
+import os,sys,re
 
 def getFileList(path, fl):  #return a list
     try:
@@ -71,21 +69,26 @@ def outputFile(dict, name):  # dict change to sorted list
         str = u'%s\t\tvalue: %s\n' % (tuples[0], tuples[1]) #join()
         saveFile.write(str.encode("utf-8"))
 
+def freqMain(inputPath, tblPath='.\\tableData.tbl'):
+    fileList = []
+
+    getFileList(inputPath, fileList)
+    
+    wF = wordFrequency(fileList)
+    tbl = readTBL(tblPath)
+    wordNotUse = compareJIS(wF, tbl)
+    codeNotUse = compareJIS(tbl, wF)
+    outputFile(wF, u'字频')
+    outputFile(wordNotUse, u'文本剩字')
+    outputFile(codeNotUse, u'码表剩字')
+
 if __name__ == "__main__":
     #run Code
-    fileList = []
     pathStr = ''
     
     if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
         pathStr = sys.argv[1]
     else:
         pathStr = os.path.dirname(sys.argv[0]) + '\\script'
-    getFileList(pathStr, fileList)
-    
-    wF = wordFrequency(fileList)
-    tbl = readTBL(os.path.dirname(sys.argv[0]) + '\\tableData.tbl')
-    wordNotUse = compareJIS(wF, tbl)
-    codeNotUse = compareJIS(tbl, wF)
-    outputFile(wF, u'字频')
-    outputFile(wordNotUse, u'文本剩字')
-    outputFile(codeNotUse, u'码表剩字')
+        
+    freqMain(pathStr)
