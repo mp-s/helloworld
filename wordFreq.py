@@ -75,12 +75,15 @@ def freqMain(inputPath, tblPath='.\\tableData.tbl'):
     getFileList(inputPath, fileList)
     
     wF = wordFrequency(fileList)
-    tbl = readTBL(tblPath)
-    wordNotUse = compareJIS(wF, tbl)
-    codeNotUse = compareJIS(tbl, wF)
     outputFile(wF, u'字频')
-    outputFile(wordNotUse, u'文本剩字')
-    outputFile(codeNotUse, u'码表剩字')
+    try:
+        tbl = readTBL(tblPath)
+        wordNotUse = compareJIS(wF, tbl)
+        codeNotUse = compareJIS(tbl, wF)
+        outputFile(wordNotUse, u'文本剩字')
+        outputFile(codeNotUse, u'码表剩字')
+    except:
+        pass
 
 if __name__ == "__main__":
     #run Code

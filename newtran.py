@@ -39,6 +39,7 @@ def getFileList(path, fl):  #return a list
 def loadTbl(tableFile):
     tableData = file(tableFile, 'r')
     tbl = {}
+    tbl['='] = '3D'
     for tableLine in tableData.readlines():
         if not tableLine == '\n' :
             d = tableLine.split('=')
