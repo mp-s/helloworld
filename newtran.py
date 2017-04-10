@@ -22,13 +22,18 @@ if len(sys.argv) > 1 :
         pass
 '''
 
-def getFileList(path, fl): #读取全部文件
-    files = os.listdir(path)
-    for f in files:
-        if(os.path.isdir(path + '\\' + f)):
-            getFileList(path + '\\' + f, fl)
-        else:
-            fl.append(path + '\\' + f)
+def getFileList(path, fl):  #return a list
+    try:
+        files = os.listdir(path)
+        for f in files:
+            subPath = path + '/' + f
+            if (os.path.isdir(subPath)):
+                getFileList(subPath, fl)
+            else:
+                if(os.path.splitext(subPath)[1] == '.txt'):
+                    fl.append(subPath)
+    except: #permission denied
+        pass
 
 # create code table
 def loadTbl(tableFile):
