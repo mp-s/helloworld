@@ -61,7 +61,7 @@ def compareJIS(source, compared): # return result dict
     '''
 
 def outputFile(dict, name):  # dict change to sorted list
-    sortedList = sorted(dict.items(), lambda x, y: cmp(x[1], y[1]), reverse=True)
+    sortedList = sorted(dict.items(), lambda x, y: cmp(x[1], y[1]), reverse=False)
     #sortedList = dict.reverse()
     saveFile = open('./' + name + ".txt", 'w')
 

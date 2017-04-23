@@ -74,7 +74,7 @@ def convertFile(sourceDir, targetDir, tblDir, tbl):
                         targetWord = tbl[sourceWord].decode('hex')
                     except:
                         errFile.write(sourcePath + '\n' + sourceWord.encode('utf-8') + '\n')
-                        targetWord = '????'
+                        targetWord = '.noWord.'
                 writebuf += targetWord
         targetFile.write(writebuf)
 
